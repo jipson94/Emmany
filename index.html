@@ -1,0 +1,93 @@
+<!-- @dsCard group="Website" viewport="1280x760" name="Marketing Website" subtitle="Site Emmany FinTech — accueil, Gateway, pays & frais, tarifs, développeurs" -->
+<!-- @startingPoint section="Website" subtitle="Site vitrine Emmany complet (multi-pages, interactif)" viewport="1280x900" -->
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emmany — Infrastructure de paiement & orchestration sécurisée</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="_ds_bundle.js"></script>
+<style>html,body{margin:0;background:#fff}#root{min-height:100vh}*{box-sizing:border-box}
+html[data-theme="dark"],html[data-theme="dark"] body{background:#08122a}
+html[data-theme="dark"] #site-scroll{background:#08122a}
+@keyframes gwFloat{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(-3deg)}}
+@keyframes devOrbit{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes devPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.35);opacity:1}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes drawLine{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes growBar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes globeShift{from{background-position-x:0}to{background-position-x:52px}}
+@keyframes ping{0%{transform:scale(1);opacity:.9}70%,100%{transform:scale(2.6);opacity:0}}
+@keyframes globeRotate{from{background-position-x:0}to{background-position-x:-452px}}
+@keyframes blinkDot{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+.em-btn{transition:transform .18s var(--ease-out),box-shadow .18s var(--ease-out),filter .18s;will-change:transform;cursor:pointer}
+.em-btn:hover{transform:translateY(-2px)}
+.em-btn:active{transform:translateY(0)}
+.em-btn-primary:hover{box-shadow:var(--shadow-brand);filter:brightness(1.08)}
+.em-btn-cyan:hover{box-shadow:var(--shadow-accent);filter:brightness(1.05)}
+.em-btn-ghost{transition:border-color .18s,color .18s,background .18s,transform .18s}
+.em-btn-ghost:hover{border-color:var(--color-primary)!important;color:var(--color-primary)!important;background:var(--blue-50)!important;transform:translateY(-2px)}
+.em-navlink{position:relative;transition:color .18s}
+.em-navlink::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:2px;background:var(--color-primary);transform:scaleX(0);transform-origin:center;transition:transform .24s var(--ease-out)}
+.em-navlink:hover::after,.em-navlink.active::after{transform:scaleX(1)}
+.em-navlink:hover{color:var(--color-primary)}
+.em-footlink{transition:color .18s,transform .18s;display:inline-block}
+.em-footlink:hover{color:#fff;transform:translateX(4px)}
+.em-social{transition:transform .2s var(--ease-out),background .2s}
+.em-social:hover{transform:translateY(-3px)}
+.em-card{transition:transform .24s var(--ease-out),box-shadow .24s var(--ease-out),border-color .24s}
+.em-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--blue-200)}
+.em-row{transition:background .18s}
+.em-row:hover{background:var(--gray-50)}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}.reveal{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body><div id="root"></div>
+<script type="text/babel" src="components/layout.jsx"></script>
+<script type="text/babel" src="pages/Home.jsx"></script>
+<script type="text/babel" src="pages/Gateway.jsx"></script>
+<script type="text/babel" src="pages/Countries.jsx"></script>
+<script type="text/babel" src="pages/Developers.jsx"></script>
+<script type="text/babel" src="pages/Pricing.jsx"></script>
+<script type="text/babel" src="pages/Documentation.jsx"></script>
+<script type="text/babel" src="pages/Contact.jsx"></script>
+<script type="text/babel" data-presets="react">
+function App() {
+  const [page, setPage] = React.useState('home');
+  const ioRef = React.useRef(null);
+  const onNav = (p) => { setPage(p); const el = document.getElementById('site-scroll'); if (el) el.scrollTop = 0; else window.scrollTo(0, 0); };
+  React.useEffect(() => {
+    if (window.lucide) window.lucide.createIcons();
+    const t = setTimeout(() => {
+      if (ioRef.current) ioRef.current.disconnect();
+      ioRef.current = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ioRef.current.unobserve(e.target); } });
+      }, { threshold: 0.12, root: document.getElementById('site-scroll') });
+      document.querySelectorAll('.reveal:not(.in)').forEach(el => ioRef.current.observe(el));
+    }, 40);
+    return () => clearTimeout(t);
+  }, [page]);
+  const navKey = page === 'login' ? 'contact' : page;
+  return (
+    <div id="site-scroll" style={{ height: '100vh', overflowY: 'auto' }}>
+      <Nav current={navKey} onNav={onNav} />
+      {page === 'home' && <Home onNav={onNav} />}
+      {page === 'gateway' && <Gateway onNav={onNav} />}
+      {page === 'countries' && <Countries onNav={onNav} />}
+      {page === 'developers' && <Developers onNav={onNav} />}
+      {page === 'pricing' && <Pricing onNav={onNav} />}
+      {page === 'docs' && <Documentation onNav={onNav} />}
+      {page === 'contact' && <Contact onNav={onNav} mode="signup" />}
+      {page === 'login' && <Contact onNav={onNav} mode="login" />}
+      <Footer onNav={onNav} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body></html>

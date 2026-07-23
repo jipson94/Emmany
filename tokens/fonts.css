@@ -1,0 +1,4 @@
+/* Emmany brand typeface — Montserrat (all weights + italics).
+   Loaded from Google Fonts CDN. If offline/self-hosted binaries are required,
+   drop .woff2 files in assets/fonts/ and swap these @font-face src urls. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
