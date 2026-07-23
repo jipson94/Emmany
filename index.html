@@ -1,5 +1,3 @@
-<!-- @dsCard group="Website" viewport="1280x760" name="Marketing Website" subtitle="Site Emmany FinTech — accueil, Gateway, pays & frais, tarifs, développeurs" -->
-<!-- @startingPoint section="Website" subtitle="Site vitrine Emmany complet (multi-pages, interactif)" viewport="1280x900" -->
 <!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Emmany — Infrastructure de paiement & orchestration sécurisée</title>
 <link rel="icon" href="assets/favicon.png">
@@ -152,10 +150,6 @@ function DevicePreview() {
     </div>
   );
 }
-if (EMBED) {
-  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-} else {
-  ReactDOM.createRoot(document.getElementById('root')).render(<DevicePreview />);
-}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 </script>
 </body></html>
