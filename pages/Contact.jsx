@@ -8,7 +8,7 @@ function Field({ label, children }) {
 
 const MODES = {
   login: {
-    img: 'assets/auth-login.png',
+    img: 'assets/auth-login.jpg',
     bullets: [['zap', 'Accédez à votre tableau de bord en direct'], ['bar-chart-3', 'Suivez volumes et taux de succès'], ['bell', 'Alertes et webhooks en temps réel']],
     panelTitle: 'Vos paiements, en un coup d’œil',
     panelText: 'Reconnectez-vous pour piloter vos transactions, versements et rapports.',
@@ -16,7 +16,7 @@ const MODES = {
     cta: 'Se connecter', doneTitle: 'Connexion réussie', accent: 'var(--color-primary)',
   },
   signup: {
-    img: 'assets/auth-signup.png',
+    img: 'assets/auth-signup.jpg',
     bullets: [['flask-conical', 'Accès instantané au sandbox'], ['shield-check', 'Certifié PCI-DSS Niveau 1'], ['headphones', "Ingénieur d'onboarding dédié"]],
     panelTitle: 'Passons à la production',
     panelText: 'Tellez-nous en un peu sur votre activité et lancez votre sandbox en quelques minutes.',
@@ -27,10 +27,10 @@ const MODES = {
 
 function Panel({ m }) {
   return (
-    <div style={{ position: 'relative', overflow: 'hidden', minHeight: '100%' }}>
+    <div className="em-auth-panel" style={{ position: 'relative', overflow: 'hidden', minHeight: '100%' }}>
       <img src={m.img} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(4,24,51,.45) 0%, rgba(4,24,51,0) 34%, rgba(4,24,51,.35) 62%, rgba(4,24,51,.92) 100%)' }} />
-      <div style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '32px 40px 40px' }}>
+      <div className="em-auth-panel-body" style={{ position: 'relative', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '32px 40px 40px' }}>
         <div>
           <h2 style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-.02em', color: '#fff', margin: 0, lineHeight: 1.15 }}>{m.panelTitle}</h2>
           <p style={{ fontSize: 15.5, lineHeight: 1.6, color: 'rgba(255,255,255,.85)', margin: '12px 0 22px', maxWidth: 380 }}>{m.panelText}</p>
@@ -56,11 +56,11 @@ function Contact({ onNav, mode = 'signup' }) {
   const set = k => e => setForm(f => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
   const canSubmit = mode === 'login' ? (form.email && form.password) : form.agree;
   return (
-    <section style={{ height: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: '1fr 1fr', overflow: 'hidden' }}>
+    <section className="em-auth-section" style={{ height: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: '1fr 1fr', overflow: 'hidden' }}>
       <Panel m={m} />
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 6%', height: '100%', overflowY: 'auto', boxSizing: 'border-box' }}>
+      <div className="em-auth-form" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 6%', height: '100%', overflowY: 'auto', boxSizing: 'border-box' }}>
         <div style={{ width: '100%', maxWidth: 400, animation: 'fadeUp .4s var(--ease-out) both' }}>
-          <button onClick={() => onNav('home')} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: 13, color: 'var(--text-muted)', marginBottom: 10, padding: 0 }}><Icon name="arrow-left" size={14} color="var(--text-muted)" />Retour à l'accueil</button>
+          <button onClick={() => onNav('home')} style={{ display: 'flex', width: 'fit-content', alignItems: 'center', gap: 6, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: 13, color: 'var(--text-muted)', marginBottom: 50, padding: 0 }}><Icon name="arrow-left" size={14} color="var(--text-muted)" />Retour à l'accueil</button>
           {sent ? (
             <div style={{ textAlign: 'center', padding: '10px 0' }}>
               <span style={{ display: 'inline-flex', width: 72, height: 72, borderRadius: 999, background: 'var(--success-soft)', alignItems: 'center', justifyContent: 'center', marginBottom: 22 }}><Icon name="check" size={36} color="var(--success)" /></span>

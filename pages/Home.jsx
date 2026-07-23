@@ -80,12 +80,12 @@ function Hero({ onNav }) {
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 12.5, fontWeight: 600, color: 'var(--color-primary)', background: 'var(--blue-50)', border: '1px solid var(--blue-100)', borderRadius: 999, padding: '5px 12px', marginBottom: 18 }}><span style={{ width: 7, height: 7, borderRadius: 999, background: 'var(--success)' }} />En service dans 12 marchés · 40+ moyens de paiement</span>
             <h1 style={{ fontSize: 46, fontWeight: 800, letterSpacing: '-.03em', lineHeight: 1.1, margin: 0, color: 'var(--ink)' }}>L'infrastructure de paiement conçue pour connecter les entreprises aux moyens de paiement <span style={{ color: 'var(--color-primary)' }}>africains</span>.</h1>
             <p style={{ fontSize: 17, lineHeight: 1.65, color: 'var(--ink-3)', margin: '20px 0 0', maxWidth: 480 }}>Emmany aide les commerçants, plateformes et développeurs à intégrer, orchestrer et suivre les paiements via une API PSP sécurisée, fiable et évolutive.</p>
-            <div style={{ display: 'flex', gap: 12, marginTop: 30 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 30 }}>
               <button onClick={() => onNav('contact')} className="em-btn em-btn-primary" style={{ height: 48, padding: '0 24px', borderRadius: 8, border: 'none', background: 'var(--color-primary)', color: '#fff', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 15.5 }}>Créer un compte</button>
               <button onClick={() => onNav('gateway')} className="em-btn em-btn-ghost" style={{ height: 48, padding: '0 22px', borderRadius: 8, background: 'var(--surface)', color: 'var(--ink)', border: '1.5px solid var(--border-default)', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 15.5 }}>Découvrir Emmany Gateway</button>
             </div>
           </div>
-          <div style={{ position: 'relative' }}>
+          <div className="em-hero-visual" style={{ position: 'relative' }}>
             {[{ ic: 'receipt', left: -34, top: 40, d: 0 }, { ic: 'file-text', left: -42, top: 330, d: 1.1 }, { ic: 'banknote', right: -34, top: 60, d: 0.6 }, { ic: 'file-check', right: -42, top: 310, d: 1.7 }].map((f, i) => (
               <span key={f.ic} style={{ position: 'absolute', left: f.left, right: f.right, top: f.top, width: 46, height: 46, borderRadius: 13, background: 'var(--surface)', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-md)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', zIndex: 3, animation: `floatY ${4.5 + i}s var(--ease-in-out) ${f.d}s infinite` }}><Icon name={f.ic} size={21} color="var(--color-primary)" /></span>
             ))}
@@ -238,7 +238,7 @@ function DevBand() {
 function SandboxBanner({ onNav }) {
   return (
     <Container style={{ paddingBottom: 64 }}>
-      <div className="reveal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, background: 'var(--warning-soft)', border: '1px solid #f4dca6', borderRadius: 12, padding: '18px 24px' }}>
+      <div className="reveal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', background: 'var(--warning-soft)', border: '1px solid #f4dca6', borderRadius: 12, padding: '18px 24px' }}>
         <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
           <Icon name="info" size={22} color="var(--warning)" />
           <div><div style={{ fontSize: 15.5, fontWeight: 700, color: 'var(--ink)' }}>Testez gratuitement avec notre sandbox</div><div style={{ fontSize: 13.5, color: 'var(--ink-3)' }}>Accédez à l'environnement de test et intégrez en toute confiance.</div></div>

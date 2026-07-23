@@ -86,6 +86,8 @@ function Logo({ tone = 'dark', product, size = 30 }) {
 function Nav({ current, onNav }) {
   const items = [['gateway', 'Produits'], ['countries', 'Pays & frais'], ['developers', 'Développeurs'], ['docs', 'Documentation'], ['pricing', 'Tarifs']];
   const [theme, setTheme] = useState(() => { try { return localStorage.getItem('em-theme') || 'light'; } catch (e) { return 'light'; } });
+  const [menuOpen, setMenuOpen] = useState(false);
+  const go = (k) => { setMenuOpen(false); onNav(k); };
   useEffect(() => { document.documentElement.setAttribute('data-theme', theme); try { localStorage.setItem('em-theme', theme); } catch (e) {} }, [theme]);
   const toggleTheme = () => setTheme(t => {
     const next = t === 'dark' ? 'light' : 'dark';
@@ -96,10 +98,10 @@ function Nav({ current, onNav }) {
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'var(--nav-bg)', backdropFilter: 'saturate(180%) blur(10px)', borderBottom: '1px solid var(--border-subtle)' }}>
       <Container style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 68 }}>
-        <a onClick={() => onNav('home')} style={{ cursor: 'pointer', display: 'flex', transition: 'transform .18s' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}><Logo size={28} /></a>
-        <nav style={{ display: 'flex', gap: 2 }}>
+        <a onClick={() => go('home')} style={{ cursor: 'pointer', display: 'flex', transition: 'transform .18s' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}><Logo size={28} /></a>
+        <nav className="em-nav-links" style={{ display: 'flex', gap: 2 }}>
           {items.map(([k, l, caret]) => (
-            <a key={k} className={'em-navlink' + (current === k ? ' active' : '')} onClick={() => onNav(k)}
+            <a key={k} className={'em-navlink' + (current === k ? ' active' : '')} onClick={() => go(k)}
               style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 4, padding: '22px 12px', fontSize: 14.5, fontWeight: 500, whiteSpace: 'nowrap', color: current === k ? 'var(--color-primary)' : 'var(--ink-3)' }}>
               {l}{caret && <Icon name="chevron-down" size={15} color="var(--gray-400)" />}
             </a>
@@ -107,10 +109,24 @@ function Nav({ current, onNav }) {
         </nav>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <button onClick={toggleTheme} aria-label="Basculer le thème" className="em-btn" style={{ width: 40, height: 40, borderRadius: 8, background: 'var(--surface)', border: '1.5px solid var(--border-default)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}><Icon name={theme === 'dark' ? 'sun' : 'moon'} size={17} color="var(--ink-2)" /></button>
-          <button onClick={() => onNav('login')} className="em-btn em-btn-ghost" style={{ height: 40, padding: '0 16px', borderRadius: 8, background: 'var(--surface)', border: '1.5px solid var(--border-default)', color: 'var(--ink)', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 14.5, display: 'inline-flex', alignItems: 'center', gap: 7 }}><Icon name="log-in" size={16} />Connexion</button>
-          <button onClick={() => onNav('contact')} className="em-btn em-btn-primary" style={{ height: 40, padding: '0 18px', borderRadius: 8, border: 'none', background: 'var(--color-primary)', color: '#fff', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 14.5, display: 'inline-flex', alignItems: 'center', gap: 7 }}><Icon name="user-plus" size={16} color="#fff" />Créer un compte</button>
+          <button onClick={() => onNav('login')} className="em-btn em-btn-ghost em-desktop-cta" style={{ height: 40, padding: '0 16px', borderRadius: 8, background: 'var(--surface)', border: '1.5px solid var(--border-default)', color: 'var(--ink)', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 14.5, display: 'inline-flex', alignItems: 'center', gap: 7 }}><Icon name="log-in" size={16} />Connexion</button>
+          <button onClick={() => onNav('contact')} className="em-btn em-btn-primary em-desktop-cta" style={{ height: 40, padding: '0 18px', borderRadius: 8, border: 'none', background: 'var(--color-primary)', color: '#fff', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 14.5, display: 'inline-flex', alignItems: 'center', gap: 7 }}><Icon name="user-plus" size={16} color="#fff" />Créer un compte</button>
+          <button onClick={() => setMenuOpen(o => !o)} aria-label="Menu" className="em-btn em-hamburger" style={{ width: 40, height: 40, borderRadius: 8, background: 'var(--surface)', border: '1.5px solid var(--border-default)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}><Icon name={menuOpen ? 'x' : 'menu'} size={18} color="var(--ink-2)" /></button>
         </div>
       </Container>
+      {menuOpen && (
+        <div className="em-mobile-menu" style={{ borderTop: '1px solid var(--border-subtle)', background: 'var(--nav-bg)', backdropFilter: 'saturate(180%) blur(10px)' }}>
+          <Container style={{ padding: '10px 24px 16px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {items.map(([k, l]) => (
+              <a key={k} onClick={() => go(k)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', minHeight: 46, fontSize: 15.5, fontWeight: 600, color: current === k ? 'var(--color-primary)' : 'var(--ink)', borderBottom: '1px solid var(--border-subtle)' }}>{l}</a>
+            ))}
+            <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
+              <button onClick={() => go('login')} className="em-btn em-btn-ghost" style={{ flex: 1, height: 46, borderRadius: 8, background: 'var(--surface)', border: '1.5px solid var(--border-default)', color: 'var(--ink)', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 15, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}><Icon name="log-in" size={16} />Connexion</button>
+              <button onClick={() => go('contact')} className="em-btn em-btn-primary" style={{ flex: 1, height: 46, borderRadius: 8, border: 'none', background: 'var(--color-primary)', color: '#fff', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 15, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}><Icon name="user-plus" size={16} color="#fff" />Créer un compte</button>
+            </div>
+          </Container>
+        </div>
+      )}
     </header>
   );
 }

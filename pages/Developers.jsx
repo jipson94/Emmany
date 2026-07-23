@@ -118,7 +118,7 @@ function Developers({ onNav }) {
             <Eyebrow>Développeurs</Eyebrow>
             <h1 style={{ fontSize: 40, fontWeight: 800, letterSpacing: '-.03em', color: 'var(--ink)', margin: '12px 0 0', lineHeight: 1.1 }}>Intégrez en quelques étapes</h1>
             <p style={{ fontSize: 16.5, color: 'var(--ink-3)', margin: '14px 0 0', maxWidth: 440 }}>Suivez notre parcours recommandé pour intégrer Emmany Gateway, du sandbox à la production.</p>
-            <div style={{ display: 'flex', gap: 12, marginTop: 26 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 26 }}>
               <button onClick={() => onNav('docs')} className="em-btn em-btn-primary" style={{ height: 46, padding: '0 22px', borderRadius: 8, border: 'none', background: 'var(--color-primary)', color: '#fff', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 15 }}>Lire la documentation</button>
               <button onClick={() => onNav('contact')} className="em-btn em-btn-ghost" style={{ height: 46, padding: '0 20px', borderRadius: 8, background: 'var(--surface)', color: 'var(--ink)', border: '1.5px solid var(--border-default)', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 15 }}>Obtenir mes clés</button>
             </div>

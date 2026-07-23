@@ -57,7 +57,7 @@ function Documentation({ onNav }) {
               <Code>{`Authorization: Bearer emy_live_••••••••••••••••`}</Code>
             </DocBlock>
             <DocBlock id="env" title="Environnements">
-              <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 14 }}>
+              <table className="em-doc-tbl" style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 14 }}>
                 <thead><tr><th style={th}>Environnement</th><th style={th}>Base URL</th><th style={th}>Préfixe de clé</th></tr></thead>
                 <tbody>
                   <tr><td style={td}>Sandbox</td><td style={{ ...td, fontFamily: 'var(--font-mono)' }}>sandbox.api.emmany.com</td><td style={{ ...td, fontFamily: 'var(--font-mono)' }}>emy_test_</td></tr>
@@ -85,7 +85,7 @@ function Documentation({ onNav }) {
   "id": "pay_8f2c1a", "status": "succeeded" }`}</Code>
             </DocBlock>
             <DocBlock id="errors" title="Codes d'erreur">
-              <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 14 }}>
+              <table className="em-doc-tbl" style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 14 }}>
                 <thead><tr><th style={th}>Code</th><th style={th}>Signification</th></tr></thead>
                 <tbody>
                   {[['400', 'Requête invalide — paramètre manquant ou mal formé'], ['401', 'Clé API invalide ou absente'], ['402', 'Paiement refusé par l\'opérateur'], ['429', 'Trop de requêtes — limite de débit atteinte'], ['500', 'Erreur serveur Emmany']].map(([c, m]) => <tr key={c}><td style={{ ...td, fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--ink)' }}>{c}</td><td style={td}>{m}</td></tr>)}

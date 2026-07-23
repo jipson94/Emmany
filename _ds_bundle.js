@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"EmmanyDesignSystem_5eb588","components":[{"name":"Logo","sourcePath":"components/brand/Logo.jsx"},{"name":"Alert","sourcePath":"components/feedback/Alert.jsx"},{"name":"Badge","sourcePath":"components/feedback/Badge.jsx"},{"name":"Button","sourcePath":"components/forms/Button.jsx"},{"name":"Checkbox","sourcePath":"components/forms/Checkbox.jsx"},{"name":"IconButton","sourcePath":"components/forms/IconButton.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Select","sourcePath":"components/forms/Select.jsx"},{"name":"Switch","sourcePath":"components/forms/Switch.jsx"},{"name":"Card","sourcePath":"components/surfaces/Card.jsx"},{"name":"StatCard","sourcePath":"components/surfaces/StatCard.jsx"}],"sourceHashes":{"components/brand/Logo.jsx":"c3030da50321","components/feedback/Alert.jsx":"4e99b2ce37a5","components/feedback/Badge.jsx":"9f655683be08","components/forms/Button.jsx":"4f2e0c4563ff","components/forms/Checkbox.jsx":"e58f65a8694c","components/forms/IconButton.jsx":"99bb8f8b371a","components/forms/Input.jsx":"3b1308bf66e9","components/forms/Select.jsx":"2ee54001fbec","components/forms/Switch.jsx":"da13e1f36b23","components/surfaces/Card.jsx":"b7a32fc27db2","components/surfaces/StatCard.jsx":"204a5d21e1eb","ui_kits/website/components/layout.jsx":"550dcbc4d0c4","ui_kits/website/pages/Contact.jsx":"f934aa42ded2","ui_kits/website/pages/Countries.jsx":"ee28470babf8","ui_kits/website/pages/Developers.jsx":"b89e2795d9d7","ui_kits/website/pages/Documentation.jsx":"b533e34105ba","ui_kits/website/pages/Gateway.jsx":"37205883dfa8","ui_kits/website/pages/Home.jsx":"910a8fe9f281","ui_kits/website/pages/Pricing.jsx":"dfa82c198ebf"},"inlinedExternals":[],"unexposedExports":[]} */
+/* @ds-bundle: {"format":4,"namespace":"EmmanyDesignSystem_5eb588","components":[{"name":"Logo","sourcePath":"components/brand/Logo.jsx"},{"name":"Alert","sourcePath":"components/feedback/Alert.jsx"},{"name":"Badge","sourcePath":"components/feedback/Badge.jsx"},{"name":"Button","sourcePath":"components/forms/Button.jsx"},{"name":"Checkbox","sourcePath":"components/forms/Checkbox.jsx"},{"name":"IconButton","sourcePath":"components/forms/IconButton.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Select","sourcePath":"components/forms/Select.jsx"},{"name":"Switch","sourcePath":"components/forms/Switch.jsx"},{"name":"Card","sourcePath":"components/surfaces/Card.jsx"},{"name":"StatCard","sourcePath":"components/surfaces/StatCard.jsx"}],"sourceHashes":{"components/brand/Logo.jsx":"c3030da50321","components/feedback/Alert.jsx":"4e99b2ce37a5","components/feedback/Badge.jsx":"9f655683be08","components/forms/Button.jsx":"4f2e0c4563ff","components/forms/Checkbox.jsx":"e58f65a8694c","components/forms/IconButton.jsx":"99bb8f8b371a","components/forms/Input.jsx":"3b1308bf66e9","components/forms/Select.jsx":"2ee54001fbec","components/forms/Switch.jsx":"da13e1f36b23","components/surfaces/Card.jsx":"b7a32fc27db2","components/surfaces/StatCard.jsx":"204a5d21e1eb","ui_kits/website/components/layout.jsx":"622bc527ff40","ui_kits/website/pages/Contact.jsx":"8bee456f333d","ui_kits/website/pages/Countries.jsx":"d40c7598362b","ui_kits/website/pages/Developers.jsx":"2b3733940edf","ui_kits/website/pages/Documentation.jsx":"18f281c8afd9","ui_kits/website/pages/Gateway.jsx":"b764a980e20b","ui_kits/website/pages/Home.jsx":"186af0372a89","ui_kits/website/pages/Pricing.jsx":"dfa82c198ebf"},"inlinedExternals":[],"unexposedExports":[]} */
 
 (() => {
 
@@ -1203,6 +1203,11 @@ function Nav({
       return 'light';
     }
   });
+  const [menuOpen, setMenuOpen] = useState(false);
+  const go = k => {
+    setMenuOpen(false);
+    onNav(k);
+  };
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     try {
@@ -1234,7 +1239,7 @@ function Nav({
       height: 68
     }
   }, /*#__PURE__*/React.createElement("a", {
-    onClick: () => onNav('home'),
+    onClick: () => go('home'),
     style: {
       cursor: 'pointer',
       display: 'flex',
@@ -1245,6 +1250,7 @@ function Nav({
   }, /*#__PURE__*/React.createElement(Logo, {
     size: 28
   })), /*#__PURE__*/React.createElement("nav", {
+    className: "em-nav-links",
     style: {
       display: 'flex',
       gap: 2
@@ -1252,7 +1258,7 @@ function Nav({
   }, items.map(([k, l, caret]) => /*#__PURE__*/React.createElement("a", {
     key: k,
     className: 'em-navlink' + (current === k ? ' active' : ''),
-    onClick: () => onNav(k),
+    onClick: () => go(k),
     style: {
       cursor: 'pointer',
       display: 'inline-flex',
@@ -1295,7 +1301,7 @@ function Nav({
     color: "var(--ink-2)"
   })), /*#__PURE__*/React.createElement("button", {
     onClick: () => onNav('login'),
-    className: "em-btn em-btn-ghost",
+    className: "em-btn em-btn-ghost em-desktop-cta",
     style: {
       height: 40,
       padding: '0 16px',
@@ -1315,7 +1321,7 @@ function Nav({
     size: 16
   }), "Connexion"), /*#__PURE__*/React.createElement("button", {
     onClick: () => onNav('contact'),
-    className: "em-btn em-btn-primary",
+    className: "em-btn em-btn-primary em-desktop-cta",
     style: {
       height: 40,
       padding: '0 18px',
@@ -1334,7 +1340,101 @@ function Nav({
     name: "user-plus",
     size: 16,
     color: "#fff"
-  }), "Cr\xE9er un compte"))));
+  }), "Cr\xE9er un compte"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setMenuOpen(o => !o),
+    "aria-label": "Menu",
+    className: "em-btn em-hamburger",
+    style: {
+      width: 40,
+      height: 40,
+      borderRadius: 8,
+      background: 'var(--surface)',
+      border: '1.5px solid var(--border-default)',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: menuOpen ? 'x' : 'menu',
+    size: 18,
+    color: "var(--ink-2)"
+  })))), menuOpen && /*#__PURE__*/React.createElement("div", {
+    className: "em-mobile-menu",
+    style: {
+      borderTop: '1px solid var(--border-subtle)',
+      background: 'var(--nav-bg)',
+      backdropFilter: 'saturate(180%) blur(10px)'
+    }
+  }, /*#__PURE__*/React.createElement(Container, {
+    style: {
+      padding: '10px 24px 16px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 2
+    }
+  }, items.map(([k, l]) => /*#__PURE__*/React.createElement("a", {
+    key: k,
+    onClick: () => go(k),
+    style: {
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      minHeight: 46,
+      fontSize: 15.5,
+      fontWeight: 600,
+      color: current === k ? 'var(--color-primary)' : 'var(--ink)',
+      borderBottom: '1px solid var(--border-subtle)'
+    }
+  }, l)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 10,
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => go('login'),
+    className: "em-btn em-btn-ghost",
+    style: {
+      flex: 1,
+      height: 46,
+      borderRadius: 8,
+      background: 'var(--surface)',
+      border: '1.5px solid var(--border-default)',
+      color: 'var(--ink)',
+      fontFamily: 'var(--font-sans)',
+      fontWeight: 600,
+      fontSize: 15,
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 7
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "log-in",
+    size: 16
+  }), "Connexion"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => go('contact'),
+    className: "em-btn em-btn-primary",
+    style: {
+      flex: 1,
+      height: 46,
+      borderRadius: 8,
+      border: 'none',
+      background: 'var(--color-primary)',
+      color: '#fff',
+      fontFamily: 'var(--font-sans)',
+      fontWeight: 600,
+      fontSize: 15,
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 7
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "user-plus",
+    size: 16,
+    color: "#fff"
+  }), "Cr\xE9er un compte")))));
 }
 function Footer({
   onNav
@@ -1482,7 +1582,7 @@ function Field({
 }
 const MODES = {
   login: {
-    img: '../../assets/auth-login.png',
+    img: '../../assets/auth-login.jpg',
     bullets: [['zap', 'Accédez à votre tableau de bord en direct'], ['bar-chart-3', 'Suivez volumes et taux de succès'], ['bell', 'Alertes et webhooks en temps réel']],
     panelTitle: 'Vos paiements, en un coup d’œil',
     panelText: 'Reconnectez-vous pour piloter vos transactions, versements et rapports.',
@@ -1493,7 +1593,7 @@ const MODES = {
     accent: 'var(--color-primary)'
   },
   signup: {
-    img: '../../assets/auth-signup.png',
+    img: '../../assets/auth-signup.jpg',
     bullets: [['flask-conical', 'Accès instantané au sandbox'], ['shield-check', 'Certifié PCI-DSS Niveau 1'], ['headphones', "Ingénieur d'onboarding dédié"]],
     panelTitle: 'Passons à la production',
     panelText: 'Tellez-nous en un peu sur votre activité et lancez votre sandbox en quelques minutes.',
@@ -1508,6 +1608,7 @@ function Panel({
   m
 }) {
   return /*#__PURE__*/React.createElement("div", {
+    className: "em-auth-panel",
     style: {
       position: 'relative',
       overflow: 'hidden',
@@ -1530,6 +1631,7 @@ function Panel({
       background: 'linear-gradient(180deg, rgba(4,24,51,.45) 0%, rgba(4,24,51,0) 34%, rgba(4,24,51,.35) 62%, rgba(4,24,51,.92) 100%)'
     }
   }), /*#__PURE__*/React.createElement("div", {
+    className: "em-auth-panel-body",
     style: {
       position: 'relative',
       height: '100%',
@@ -1612,6 +1714,7 @@ function Contact({
   }));
   const canSubmit = mode === 'login' ? form.email && form.password : form.agree;
   return /*#__PURE__*/React.createElement("section", {
+    className: "em-auth-section",
     style: {
       height: 'calc(100vh - 80px)',
       display: 'grid',
@@ -1621,6 +1724,7 @@ function Contact({
   }, /*#__PURE__*/React.createElement(Panel, {
     m: m
   }), /*#__PURE__*/React.createElement("div", {
+    className: "em-auth-form",
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -1639,7 +1743,8 @@ function Contact({
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => onNav('home'),
     style: {
-      display: 'inline-flex',
+      display: 'flex',
+      width: 'fit-content',
       alignItems: 'center',
       gap: 6,
       background: 'none',
@@ -1648,7 +1753,7 @@ function Contact({
       fontFamily: 'var(--font-sans)',
       fontSize: 13,
       color: 'var(--text-muted)',
-      marginBottom: 10,
+      marginBottom: 50,
       padding: 0
     }
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -1925,6 +2030,7 @@ function Globe() {
     };
   });
   return /*#__PURE__*/React.createElement("div", {
+    className: "em-globe",
     style: {
       position: 'relative',
       width: 380,
@@ -2355,16 +2461,19 @@ function Countries() {
       padding: '40px 0 64px'
     }
   }, /*#__PURE__*/React.createElement(Container, null, /*#__PURE__*/React.createElement("div", {
-    className: "reveal in",
+    className: "reveal in em-countries-head",
     style: {
-      display: 'flex',
+      display: 'grid',
+      gridTemplateColumns: '1fr auto',
+      gridTemplateAreas: '"intro globe" "stats globe"',
+      columnGap: 24,
+      rowGap: 20,
       alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: 24,
       marginBottom: 28
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
+      gridArea: 'intro',
       maxWidth: 540
     }
   }, /*#__PURE__*/React.createElement(Eyebrow, null, "Couverture"), /*#__PURE__*/React.createElement("h1", {
@@ -2382,11 +2491,16 @@ function Countries() {
       color: 'var(--ink-3)',
       margin: '12px 0 0'
     }
-  }, "D\xE9couvrez les moyens de paiement disponibles par pays, leurs statuts et les frais associ\xE9s."), /*#__PURE__*/React.createElement("div", {
+  }, "D\xE9couvrez les moyens de paiement disponibles par pays, leurs statuts et les frais associ\xE9s.")), /*#__PURE__*/React.createElement("div", {
     style: {
+      gridArea: 'globe',
+      justifySelf: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(Globe, null)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      gridArea: 'stats',
       display: 'flex',
-      gap: 28,
-      marginTop: 24
+      gap: 28
     }
   }, [[12, 'Marchés', ''], [40, 'Moyens', '+'], [6, 'Devises', '']].map(([v, l, suf]) => /*#__PURE__*/React.createElement("div", {
     key: l
@@ -2404,7 +2518,7 @@ function Countries() {
       fontSize: 12.5,
       color: 'var(--text-muted)'
     }
-  }, l))))), /*#__PURE__*/React.createElement(Globe, null)), /*#__PURE__*/React.createElement("div", {
+  }, l))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexWrap: 'wrap',
@@ -2953,6 +3067,7 @@ function Developers({
   }, "Suivez notre parcours recommand\xE9 pour int\xE9grer Emmany Gateway, du sandbox \xE0 la production."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
+      flexWrap: 'wrap',
       gap: 12,
       marginTop: 26
     }
@@ -3380,6 +3495,7 @@ function Documentation({
     id: "env",
     title: "Environnements"
   }, /*#__PURE__*/React.createElement("table", {
+    className: "em-doc-tbl",
     style: {
       width: '100%',
       borderCollapse: 'collapse',
@@ -3467,6 +3583,7 @@ function Documentation({
     id: "errors",
     title: "Codes d'erreur"
   }, /*#__PURE__*/React.createElement("table", {
+    className: "em-doc-tbl",
     style: {
       width: '100%',
       borderCollapse: 'collapse',
@@ -3591,6 +3708,7 @@ function GatewayArt() {
     c: 'var(--cyan-400)'
   }];
   return /*#__PURE__*/React.createElement("div", {
+    className: "em-gateway-art",
     style: {
       position: 'relative',
       height: 300,
@@ -3622,6 +3740,7 @@ function GatewayArt() {
     d: 2
   }].map((b, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
+    className: "em-gw-blob",
     style: {
       position: 'absolute',
       left: b.x,
@@ -3832,15 +3951,7 @@ function Gateway({
       color: 'var(--color-primary)',
       fontWeight: 600
     }
-  }, "Produits"), /*#__PURE__*/React.createElement(Icon, {
-    name: "chevron-right",
-    size: 15,
-    color: "var(--gray-400)"
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--text-muted)'
-    }
-  }, "Emmany Gateway")), /*#__PURE__*/React.createElement("div", {
+  }, "Produits")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
@@ -3989,6 +4100,7 @@ function Gateway({
   }, "Pr\xEAt \xE0 int\xE9grer Emmany Gateway ?"), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
+      flexWrap: 'wrap',
       gap: 12,
       justifyContent: 'center',
       marginTop: 24
@@ -4482,6 +4594,7 @@ function Hero({
   }, "Emmany aide les commer\xE7ants, plateformes et d\xE9veloppeurs \xE0 int\xE9grer, orchestrer et suivre les paiements via une API PSP s\xE9curis\xE9e, fiable et \xE9volutive."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
+      flexWrap: 'wrap',
       gap: 12,
       marginTop: 30
     }
@@ -4514,6 +4627,7 @@ function Hero({
       fontSize: 15.5
     }
   }, "D\xE9couvrir Emmany Gateway"))), /*#__PURE__*/React.createElement("div", {
+    className: "em-hero-visual",
     style: {
       position: 'relative'
     }
@@ -4989,6 +5103,7 @@ function SandboxBanner({
       alignItems: 'center',
       justifyContent: 'space-between',
       gap: 24,
+      flexWrap: 'wrap',
       background: 'var(--warning-soft)',
       border: '1px solid #f4dca6',
       borderRadius: 12,

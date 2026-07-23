@@ -11,9 +11,9 @@ function GatewayArt() {
     { id: 'gw3', d: 'M40,150 L150,150 Q210,150 250,228', dur: 2.4, delay: 1, c: 'var(--cyan-400)' },
   ];
   return (
-    <div style={{ position: 'relative', height: 300, overflow: 'hidden' }}>
+    <div className="em-gateway-art" style={{ position: 'relative', height: 300, overflow: 'hidden' }}>
       {[{ x: 20, y: 10, s: 190, c: 'rgba(1,252,233,.20)', d: 0 }, { x: 200, y: 30, s: 180, c: 'rgba(0,66,236,.18)', d: 1.2 }, { x: 180, y: 160, s: 200, c: 'rgba(0,216,200,.16)', d: 0.6 }, { x: 0, y: 150, s: 170, c: 'rgba(0,66,236,.14)', d: 2 }].map((b, i) => (
-        <div key={i} style={{ position: 'absolute', left: b.x, top: b.y, width: b.s, height: b.s, borderRadius: '50%', background: `radial-gradient(circle at 40% 35%, ${b.c}, transparent 68%)`, filter: 'blur(8px)', animation: `gwFloat ${6 + i}s var(--ease-in-out) ${b.d}s infinite` }} />
+        <div key={i} className="em-gw-blob" style={{ position: 'absolute', left: b.x, top: b.y, width: b.s, height: b.s, borderRadius: '50%', background: `radial-gradient(circle at 40% 35%, ${b.c}, transparent 68%)`, filter: 'blur(8px)', animation: `gwFloat ${6 + i}s var(--ease-in-out) ${b.d}s infinite` }} />
       ))}
       <svg viewBox="0 0 300 300" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }}>
         <defs>{paths.map(p => <path key={p.id} id={p.id} d={p.d} fill="none" />)}</defs>
@@ -68,8 +68,6 @@ function Gateway({ onNav }) {
         <Container>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13.5, marginBottom: 28 }}>
             <a onClick={() => onNav('home')} style={{ cursor: 'pointer', color: 'var(--color-primary)', fontWeight: 600 }}>Produits</a>
-            <Icon name="chevron-right" size={15} color="var(--gray-400)" />
-            <span style={{ color: 'var(--text-muted)' }}>Emmany Gateway</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
             <div className="reveal in">
@@ -105,7 +103,7 @@ function Gateway({ onNav }) {
       <Container style={{ paddingBottom: 64 }}>
         <div className="reveal" style={{ textAlign: 'center', background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 16, padding: '40px 24px' }}>
           <h3 style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-.02em', color: 'var(--ink)', margin: 0 }}>Prêt à intégrer Emmany Gateway ?</h3>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginTop: 24 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', marginTop: 24 }}>
             <button onClick={() => onNav('contact')} className="em-btn em-btn-primary" style={{ height: 48, padding: '0 24px', borderRadius: 8, border: 'none', background: 'var(--color-primary)', color: '#fff', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 15.5 }}>Créer un compte</button>
             <button onClick={() => onNav('docs')} className="em-btn em-btn-ghost" style={{ height: 48, padding: '0 22px', borderRadius: 8, background: 'var(--surface)', color: 'var(--ink)', border: '1.5px solid var(--border-default)', fontFamily: 'var(--font-sans)', fontWeight: 600, fontSize: 15.5 }}>Explorer la documentation</button>
           </div>

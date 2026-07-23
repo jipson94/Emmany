@@ -18,7 +18,7 @@ function Globe() {
     return { id: 'flow' + i, d: `M${n.x},${n.y} Q${mx.toFixed(0)},${my.toFixed(0)} ${hub.x},${hub.y}`, node: n, dur: 2.4 + i * 0.35 };
   });
   return (
-    <div style={{ position: 'relative', width: 380, height: 380, flexShrink: 0 }}>
+    <div className="em-globe" style={{ position: 'relative', width: 380, height: 380, flexShrink: 0 }}>
       {[300, 230, 150].map((d, i) => (
         <div key={i} style={{ position: 'absolute', left: '50%', top: '50%', width: d, height: d, marginLeft: -d / 2, marginTop: -d / 2, borderRadius: '50%', border: '1.5px dashed var(--blue-100)', animation: `devOrbit ${24 + i * 8}s linear infinite ${i % 2 ? 'reverse' : ''}` }} />
       ))}
@@ -144,16 +144,16 @@ function Countries() {
   return (
     <section style={{ padding: '40px 0 64px' }}>
       <Container>
-        <div className="reveal in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, marginBottom: 28 }}>
-          <div style={{ maxWidth: 540 }}>
+        <div className="reveal in em-countries-head" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gridTemplateAreas: '"intro globe" "stats globe"', columnGap: 24, rowGap: 20, alignItems: 'center', marginBottom: 28 }}>
+          <div style={{ gridArea: 'intro', maxWidth: 540 }}>
             <Eyebrow>Couverture</Eyebrow>
             <h1 style={{ fontSize: 38, fontWeight: 800, letterSpacing: '-.02em', color: 'var(--ink)', margin: '12px 0 0' }}>Pays & moyens de paiement</h1>
             <p style={{ fontSize: 16, lineHeight: 1.6, color: 'var(--ink-3)', margin: '12px 0 0' }}>Découvrez les moyens de paiement disponibles par pays, leurs statuts et les frais associés.</p>
-            <div style={{ display: 'flex', gap: 28, marginTop: 24 }}>
-              {[[12, 'Marchés', ''], [40, 'Moyens', '+'], [6, 'Devises', '']].map(([v, l, suf]) => (<div key={l}><div style={{ fontSize: 26, fontWeight: 800, color: 'var(--color-primary)' }}><CountUp value={v} suffix={suf} /></div><div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{l}</div></div>))}
-            </div>
           </div>
-          <Globe />
+          <div style={{ gridArea: 'globe', justifySelf: 'center' }}><Globe /></div>
+          <div style={{ gridArea: 'stats', display: 'flex', gap: 28 }}>
+            {[[12, 'Marchés', ''], [40, 'Moyens', '+'], [6, 'Devises', '']].map(([v, l, suf]) => (<div key={l}><div style={{ fontSize: 26, fontWeight: 800, color: 'var(--color-primary)' }}><CountUp value={v} suffix={suf} /></div><div style={{ fontSize: 12.5, color: 'var(--text-muted)' }}>{l}</div></div>))}
+          </div>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginBottom: 22 }}>
           {[['actif', 'Disponible en production'], ['bientot', 'Bientôt disponible'], ['maintenance', 'En maintenance'], ['sandbox', 'Sandbox uniquement']].map(([k, l]) => (
